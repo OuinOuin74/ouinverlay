@@ -14,7 +14,6 @@ SLOT="0"
 IUSE="alsa +faudio joystick +llvm pulseaudio sdl vulkan"
 
 RDEPEND="
-	dev-debug/gdb
 	dev-libs/flatbuffers
 	dev-libs/libusb
 	>=dev-libs/pugixml-1.15
