@@ -1,0 +1,11 @@
+--- InputPlumber-0.74.0/Cargo.toml.orig	2026-02-18 17:50:31.052709595 +0100
++++ InputPlumber-0.74.0/Cargo.toml	2026-02-18 17:51:10.353351808 +0100
+@@ -141,7 +141,7 @@
+ udev = { version = "0.9.3", features = ["mio"] }
+ uhid-virt = "0.0.8"
+ version-compare = "0.2.1"
+-virtual-usb = { git = "https://github.com/ShadowBlip/virtual-usb-rs.git", rev = "5c4c551a23b56f627a36d6775a5876c174be9eb3" }
++virtual-usb = { path = "VIRTUAL_USB_PATH_PLACEHOLDER" }
+ xdg = "3.0.0"
+ zbus = { version = "5.12.0", default-features = false, features = ["tokio"] }
+ zbus_macros = "5.12.0"

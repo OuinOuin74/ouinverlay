@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <longdescription>
+    LRPS2 is a libretro core based on PCSX2, the PlayStation 2 emulator.
+    It provides PS2 emulation via the libretro API, compatible with frontends
+    such as RetroArch. Requires a PlayStation 2 BIOS image to function.
+  </longdescription>
+  <upstream>
+    <remote-id type="github">libretro/ps2</remote-id>
+  </upstream>
+</pkgmetadata>

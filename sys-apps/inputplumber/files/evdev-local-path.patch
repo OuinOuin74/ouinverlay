@@ -1,0 +1,14 @@
+--- InputPlumber-0.74.0/Cargo.toml.orig	2026-02-18 17:33:44.468725399 +0100
++++ InputPlumber-0.74.0/Cargo.toml	2026-02-18 17:34:50.564302295 +0100
+@@ -110,9 +110,9 @@
+ clap = { version = "4.5.54", features = ["derive", "string"] }
+ clap_complete = "4.5.65"
+ env_logger = "0.11.8"
+-evdev = { git = "https://github.com/emberian/evdev.git", features = [
++evdev = { path = "EVDEV_PATH_PLACEHOLDER", features = [
+   "tokio",
+-], rev = "42b58ee08508b7799322a13bf89121a1d29cf0a2" }
++] }
+ futures = "0.3.31"
+ glob-match = "0.2.1"
+ hidapi = "2.6.4"

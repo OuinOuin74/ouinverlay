@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <upstream>
+    <remote-id type="github">notaz/picodrive</remote-id>
+  </upstream>
+  <longdescription>
+    PicoDrive is a fast and portable emulator for Sega 8/16-bit consoles
+    and the 32X add-on, ported to libretro. It is the only open-source
+    emulator to support the Sega 32X add-on. Supported systems include
+    Mega Drive/Genesis, Sega CD/Mega CD, Master System, Game Gear,
+    SG-1000 and 32X.
+  </longdescription>
+</pkgmetadata>

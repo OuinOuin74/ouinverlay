@@ -1,0 +1,7 @@
+--- a/Makefile	2026-02-17 23:46:31.813752734 +0100
++++ b/Makefile	2026-02-17 23:46:56.339316313 +0100
+@@ -43,4 +43,3 @@
+ 	install -m644 "data/user/com.steampowered.SteamOSManager1.service" "$(DESTDIR)/usr/share/dbus-1/services/"
+ 	install -m644 "data/user/steamos-manager.service" "$(DESTDIR)/usr/lib/systemd/user/"
+ 	install -m644 "data/user/steamos-manager-session-cleanup.service" "$(DESTDIR)/usr/lib/systemd/user/"
+-	install -m644 "data/user/orca.service" "$(DESTDIR)/usr/lib/systemd/user/"
