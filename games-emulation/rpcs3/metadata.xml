@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <longdescription>
+    RPCS3 is a free and open-source Sony PlayStation 3 emulator and debugger
+    written in C++ for Windows, Linux and FreeBSD.
+  </longdescription>
+  <use>
+    <flag name="alsa">Enable ALSA audio backend support</flag>
+    <flag name="faudio">Enable FAudio backend for accurate XAudio2 emulation</flag>
+    <flag name="joystick">Enable joystick/gamepad support via libevdev</flag>
+    <flag name="llvm">Enable LLVM-based recompiler for improved performance</flag>
+    <flag name="pulseaudio">Enable PulseAudio backend support</flag>
+    <flag name="sdl">Enable SDL3 input backend support</flag>
+    <flag name="vulkan">Enable Vulkan rendering backend (recommended)</flag>
+  </use>
+  <upstream>
+    <remote-id type="github">RPCS3/rpcs3</remote-id>
+    <bugs-to>https://github.com/RPCS3/rpcs3/issues</bugs-to>
+    <changelog>https://github.com/RPCS3/rpcs3/releases</changelog>
+  </upstream>
+</pkgmetadata>

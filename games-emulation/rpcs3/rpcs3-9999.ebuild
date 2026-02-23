@@ -27,7 +27,7 @@ RDEPEND="
 	media-libs/libpng:*
 	media-libs/openal
 	media-video/ffmpeg:=
-	sys-libs/zlib
+	virtual/zlib
 	virtual/opengl
 	x11-libs/libX11
 	alsa? ( media-libs/alsa-lib )
@@ -53,6 +53,8 @@ EGIT_SUBMODULES=(
 	"-3rdparty/pugixml"
 	"-3rdparty/zlib"
 	"-rpcs3-ffmpeg"
+	"-3rdparty/xxHash"
+	"-3rdparty/flatbuffers"
 )
 
 src_prepare() {
