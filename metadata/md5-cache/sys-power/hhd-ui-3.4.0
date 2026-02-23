@@ -1,0 +1,15 @@
+BDEPEND=net-libs/nodejs[npm] app-arch/unzip
+DEFINED_PHASES=compile install postinst postrm preinst prepare unpack
+DESCRIPTION=Configurator interface for Handheld Daemon
+EAPI=8
+HOMEPAGE=https://hhd.dev
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=desktop xdg
+KEYWORDS=~amd64
+LICENSE=GPL-3+
+PDEPEND=sys-power/hhd
+RESTRICT=strip
+SLOT=0
+SRC_URI=https://github.com/hhd-dev/hhd-ui/archive/refs/tags/v3.4.0.tar.gz -> hhd-ui-3.4.0.tar.gz https://github.com/electron/electron/releases/download/v40.4.1/electron-v40.4.1-linux-x64.zip -> electron-40.4.1-linux-x64.zip https://github.com/OuinOuin74/hhd-overlay/releases/download/hhd-ui-3.4.0-deps/hhd-ui-3.4.0-node_modules.tar.gz
+_eclasses_=desktop	26d57169ca094c04be416993844ec8bc	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575
+_md5_=c76a621164278a25aa9488ec4175b4ef

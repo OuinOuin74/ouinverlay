@@ -1,0 +1,11 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile configure install prepare unpack
+DESCRIPTION=Fast MegaDrive/MegaCD/32X libretro core
+EAPI=8
+HOMEPAGE=https://github.com/libretro/picodrive
+INHERIT=git-r3
+LICENSE=MAME
+PROPERTIES=live
+SLOT=0
+_eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81
+_md5_=49023b33ddb9376ac35b22f2d518947e

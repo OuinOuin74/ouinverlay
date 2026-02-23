@@ -11,7 +11,6 @@ EGIT_REPO_URI="https://github.com/libretro/ps2.git"
 
 LICENSE="GPL-3+"
 SLOT="0"
-KEYWORDS="~amd64"
 
 BDEPEND="
 	dev-build/cmake

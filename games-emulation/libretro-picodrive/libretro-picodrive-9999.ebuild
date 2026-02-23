@@ -11,7 +11,6 @@ EGIT_REPO_URI="https://github.com/notaz/picodrive.git"
 
 LICENSE="MAME"
 SLOT="0"
-KEYWORDS="~amd64"
 
 src_prepare() {
 	default

@@ -11,7 +11,6 @@ EGIT_REPO_URI="https://github.com/libretro/Genesis-Plus-GX.git"
 
 LICENSE="Genesis-Plus-GX"
 SLOT="0"
-KEYWORDS="~amd64"
 
 src_prepare() {
 	default

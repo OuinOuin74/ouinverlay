@@ -365,9 +365,12 @@ HOMEPAGE="https://github.com/ShadowBlip/InputPlumber"
 EVDEV_COMMIT="42b58ee08508b7799322a13bf89121a1d29cf0a2"
 VIRTUAL_USB_COMMIT="5c4c551a23b56f627a36d6775a5876c174be9eb3"
 
-SRC_URI="https://github.com/ShadowBlip/InputPlumber/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
-	https://github.com/emberian/evdev/archive/${EVDEV_COMMIT}.tar.gz -> evdev-${EVDEV_COMMIT}.tar.gz
-	https://github.com/ShadowBlip/virtual-usb-rs/archive/${VIRTUAL_USB_COMMIT}.tar.gz -> virtual-usb-${VIRTUAL_USB_COMMIT}.tar.gz
+SRC_URI="https://github.com/ShadowBlip/InputPlumber/archive/refs/tags/v${PV}.tar.gz
+		-> ${P}.tar.gz
+	https://github.com/emberian/evdev/archive/${EVDEV_COMMIT}.tar.gz
+		-> evdev-${EVDEV_COMMIT}.tar.gz
+	https://github.com/ShadowBlip/virtual-usb-rs/archive/${VIRTUAL_USB_COMMIT}.tar.gz
+		-> virtual-usb-${VIRTUAL_USB_COMMIT}.tar.gz
 	${CARGO_CRATE_URIS}"
 
 PATCHES=(

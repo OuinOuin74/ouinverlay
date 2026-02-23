@@ -19,7 +19,6 @@ COMMON_COMMIT="70ed90c42ddea828f53dd1b984c6443ddb39dbd6"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
 
 BDEPEND="
 	app-arch/unzip

@@ -13,7 +13,6 @@ S="${WORKDIR}/${P}"
 
 LICENSE="FBNeo"
 SLOT="0"
-KEYWORDS="~amd64"
 
 RDEPEND="
 	virtual/zlib

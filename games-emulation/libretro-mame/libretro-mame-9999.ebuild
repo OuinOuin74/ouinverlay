@@ -13,7 +13,6 @@ EGIT_REPO_URI="https://github.com/libretro/mame.git"
 
 LICENSE="MAME"
 SLOT="0"
-KEYWORDS="~amd64"
 
 RDEPEND="
 	media-libs/alsa-lib

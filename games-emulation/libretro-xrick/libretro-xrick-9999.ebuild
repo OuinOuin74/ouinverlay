@@ -11,7 +11,6 @@ EGIT_REPO_URI="https://github.com/libretro/xrick-libretro.git"
 
 LICENSE="xrick"
 SLOT="0"
-KEYWORDS="~amd64"
 
 src_compile() {
 	emake

@@ -5,7 +5,7 @@
     ScummVM libretro core. Allows playing classic point-and-click adventure
     games via RetroArch using the ScummVM engine.
   </longdescription>
-  <use>
-    <flag name="cloud">Enable cloud save support via libcurl (Google Drive, Dropbox, etc.)</flag>
-  </use>
+  <upstream>
+    <remote-id type="github">libretro/FBNeo</remote-id>
+  </upstream>
 </pkgmetadata>
