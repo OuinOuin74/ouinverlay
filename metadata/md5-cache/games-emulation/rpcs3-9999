@@ -1,6 +1,6 @@
 BDEPEND=|| ( >=sys-devel/gcc-13 >=llvm-core/clang-19 ) virtual/pkgconfig app-alternatives/ninja >=dev-build/cmake-3.28.5 >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=compile configure install postinst prepare setup test unpack
-DEPEND=app-arch/zstd:= dev-libs/flatbuffers dev-libs/hidapi dev-libs/libusb:1 dev-libs/protobuf:= dev-libs/pugixml dev-libs/xxhash >=dev-qt/qtbase-6.5.2:6[dbus,gui,widgets] >=dev-qt/qtdeclarative-6.5.2:6 >=dev-qt/qtmultimedia-6.5.2:6 >=dev-qt/qtsvg-6.5.2:6 dev-util/glslang:= media-libs/cubeb media-libs/glew:0 media-libs/libpng:* media-libs/openal media-libs/opencv:= media-libs/rtmidi media-video/ffmpeg:= net-libs/miniupnpc:= net-misc/curl virtual/opengl virtual/zlib x11-libs/libX11 faudio? ( app-emulation/faudio ) gamemode? ( games-util/gamemode ) joystick? ( dev-libs/libevdev ) sdl? ( media-libs/libsdl3:= ) vulkan? ( media-libs/vulkan-loader )
+DEPEND=app-arch/zstd:= dev-libs/flatbuffers dev-libs/hidapi dev-libs/libusb:1 dev-libs/pugixml dev-libs/xxhash >=dev-qt/qtbase-6.5.2:6[dbus,gui,widgets] >=dev-qt/qtdeclarative-6.5.2:6 >=dev-qt/qtmultimedia-6.5.2:6 >=dev-qt/qtsvg-6.5.2:6 dev-util/glslang:= media-libs/cubeb media-libs/glew:0 media-libs/libpng:* media-libs/openal media-libs/opencv:= media-libs/rtmidi media-video/ffmpeg:= net-libs/miniupnpc:= net-misc/curl virtual/opengl virtual/zlib x11-libs/libX11 faudio? ( app-emulation/faudio ) gamemode? ( games-util/gamemode ) joystick? ( dev-libs/libevdev ) sdl? ( media-libs/libsdl3:= ) vulkan? ( media-libs/vulkan-loader )
 DESCRIPTION=PlayStation 3 emulator
 EAPI=8
 HOMEPAGE=https://rpcs3.net/
@@ -8,7 +8,7 @@ INHERIT=cmake git-r3
 IUSE=+faudio +gamemode joystick +native sdl +vulkan
 LICENSE=GPL-2
 PROPERTIES=live
-RDEPEND=app-arch/zstd:= dev-libs/flatbuffers dev-libs/hidapi dev-libs/libusb:1 dev-libs/protobuf:= dev-libs/pugixml dev-libs/xxhash >=dev-qt/qtbase-6.5.2:6[dbus,gui,widgets] >=dev-qt/qtdeclarative-6.5.2:6 >=dev-qt/qtmultimedia-6.5.2:6 >=dev-qt/qtsvg-6.5.2:6 dev-util/glslang:= media-libs/cubeb media-libs/glew:0 media-libs/libpng:* media-libs/openal media-libs/opencv:= media-libs/rtmidi media-video/ffmpeg:= net-libs/miniupnpc:= net-misc/curl virtual/opengl virtual/zlib x11-libs/libX11 faudio? ( app-emulation/faudio ) gamemode? ( games-util/gamemode ) joystick? ( dev-libs/libevdev ) sdl? ( media-libs/libsdl3:= ) vulkan? ( media-libs/vulkan-loader )
+RDEPEND=app-arch/zstd:= dev-libs/flatbuffers dev-libs/hidapi dev-libs/libusb:1 dev-libs/pugixml dev-libs/xxhash >=dev-qt/qtbase-6.5.2:6[dbus,gui,widgets] >=dev-qt/qtdeclarative-6.5.2:6 >=dev-qt/qtmultimedia-6.5.2:6 >=dev-qt/qtsvg-6.5.2:6 dev-util/glslang:= media-libs/cubeb media-libs/glew:0 media-libs/libpng:* media-libs/openal media-libs/opencv:= media-libs/rtmidi media-video/ffmpeg:= net-libs/miniupnpc:= net-misc/curl virtual/opengl virtual/zlib x11-libs/libX11 faudio? ( app-emulation/faudio ) gamemode? ( games-util/gamemode ) joystick? ( dev-libs/libevdev ) sdl? ( media-libs/libsdl3:= ) vulkan? ( media-libs/vulkan-loader )
 SLOT=0
 _eclasses_=toolchain-funcs	7e440a20ac11dece04e3334622e6e5da	flag-o-matic	ed1eda86c8f746a2a75f7f9f7478f5f4	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	3a59a39e97af0f7c03f49cf3c22f262b	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	5691a3da96eac88f135cf3596b8c2c3c	git-r3	875eb471682d3e1f18da124be97dcc81
-_md5_=04e16655e300dc15767f10fafc5bb706
+_md5_=8f5658b8f8af661b806d47651456b945
