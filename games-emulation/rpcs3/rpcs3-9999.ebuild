@@ -13,7 +13,6 @@ SLOT="0"
 
 IUSE="
 	+faudio
-	+gamemode
 	joystick
 	+native
 	sdl
@@ -45,7 +44,6 @@ RDEPEND="
 	virtual/zlib
 	x11-libs/libX11
 	faudio?   ( app-emulation/faudio )
-	gamemode? ( games-util/gamemode )
 	joystick? ( dev-libs/libevdev )
 	sdl?      ( media-libs/libsdl3:= )
 	vulkan?   ( media-libs/vulkan-loader )
@@ -82,13 +80,8 @@ EGIT_SUBMODULES=(
 	"-3rdparty/cubeb/cubeb"
 	"-rpcs3-ffmpeg"
 	"-3rdparty/discord-rpc/discord-rpc"
-	"-3rdparty/feralinteractive/feralinteractive"
 	"-3rdparty/llvm/llvm"
 )
-
-pkg_setup() {
-	use gamemode || EGIT_SUBMODULES+=( "3rdparty/feralinteractive/feralinteractive" )
-}
 
 src_prepare() {
 	cmake_src_prepare
@@ -106,7 +99,7 @@ src_configure() {
 		# --- USE flags ---
 		-DUSE_DISCORD_RPC=OFF
 		-DUSE_FAUDIO=$(usex faudio ON OFF)
-		-DUSE_GAMEMODE=$(usex gamemode ON OFF)
+		-DUSE_GAMEMODE=ON
 		-DUSE_LIBEVDEV=$(usex joystick ON OFF)
 		-DUSE_SDL=$(usex sdl ON OFF)
 		-DUSE_VULKAN=$(usex vulkan ON OFF)
