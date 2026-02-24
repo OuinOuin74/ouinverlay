@@ -6,11 +6,10 @@
     written in C++ for Windows, Linux and FreeBSD.
   </longdescription>
   <use>
-    <flag name="alsa">Enable ALSA audio backend support</flag>
     <flag name="faudio">Enable FAudio backend for accurate XAudio2 emulation</flag>
+    <flag name="gamemode">Enable Feral GameMode support for automatic CPU performance tuning during gameplay</flag>
     <flag name="joystick">Enable joystick/gamepad support via libevdev</flag>
-    <flag name="llvm">Enable LLVM-based recompiler for improved performance</flag>
-    <flag name="pulseaudio">Enable PulseAudio backend support</flag>
+    <flag name="native">Compile with -march=native to enable all CPU-specific optimizations (recommended for local builds only)</flag>
     <flag name="sdl">Enable SDL3 input backend support</flag>
     <flag name="vulkan">Enable Vulkan rendering backend (recommended)</flag>
   </use>
