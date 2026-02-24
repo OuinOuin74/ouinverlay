@@ -39,7 +39,6 @@ RDEPEND="
 		dev-python/chardet[${PYTHON_USEDEP}]
 		dev-python/markdown[${PYTHON_USEDEP}]
 		dev-python/orjson[${PYTHON_USEDEP}]
-		dev-python/pathvalidate[${PYTHON_USEDEP}]
 		dev-python/pycurl[${PYTHON_USEDEP}]
 		dev-python/pygobject:3[${PYTHON_USEDEP}]
 		dev-python/pyyaml[${PYTHON_USEDEP}]
