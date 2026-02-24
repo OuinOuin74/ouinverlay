@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <longdescription>
+    Bottles is a free and open source application that allows you to easily
+    manage Wine and Proton prefixes. It provides a clean GTK4/Libadwaita
+    interface to create, manage, and run Windows applications and games
+    on Linux, with support for different runners, DXVK, VKD3D, and more.
+  </longdescription>
+  <use>
+    <flag name="gamemode">Enable support for Feral Interactive's GameMode
+      daemon to optimise system performance during gaming sessions.</flag>
+    <flag name="vkd3d">Pull in <pkg>app-emulation/vkd3d-proton</pkg> for
+      DirectX 12 over Vulkan translation.</flag>
+    <flag name="vulkan">Pull in <pkg>media-libs/vulkan-loader</pkg> for
+      Vulkan rendering support.</flag>
+  </use>
+  <upstream>
+    <remote-id type="github">bottlesdevs/Bottles</remote-id>
+    <bugs-to>https://github.com/bottlesdevs/Bottles/issues</bugs-to>
+    <changelog>https://github.com/bottlesdevs/Bottles/releases</changelog>
+  </upstream>
+</pkgmetadata>
