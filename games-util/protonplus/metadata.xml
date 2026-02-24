@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <longdescription>
+    ProtonPlus is a modern compatibility tools manager built with GTK4 and
+    Libadwaita. It allows installing and managing GE-Proton, Wine-GE and other
+    compatibility tools for Steam, Lutris, Heroic Games Launcher and Bottles.
+  </longdescription>
+  <upstream>
+    <remote-id type="github">Vysp3r/ProtonPlus</remote-id>
+  </upstream>
+</pkgmetadata>
