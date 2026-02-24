@@ -70,12 +70,12 @@ EGIT_SUBMODULES=(
 	"-3rdparty/hidapi/hidapi"
 	"-3rdparty/libsdl-org/SDL"
 	"-3rdparty/libusb"
+	"-3rdparty/libpng"
 	"-3rdparty/miniupnp/miniupnp"
 	"-3rdparty/OpenAL/openal-soft"
 	"-3rdparty/opencv/opencv"
 	"-3rdparty/pugixml"
 	"-3rdparty/rtmidi/rtmidi"
-	"-3rdparty/wolfssl/wolfssl"
 	"-3rdparty/xxHash"
 	"-3rdparty/zlib"
 	"-3rdparty/zstd/zstd"
@@ -125,6 +125,7 @@ src_configure() {
 		-DUSE_SYSTEM_PUGIXML=ON
 		-DUSE_SYSTEM_RTMIDI=ON
 		-DUSE_SYSTEM_SDL=$(usex sdl ON OFF)
+		-DUSE_SYSTEM_PROTOBUF=OFF
 		-DUSE_SYSTEM_WOLFSSL=OFF
 		-DUSE_SYSTEM_ZLIB=ON
 		-DUSE_SYSTEM_ZSTD=ON
