@@ -25,7 +25,6 @@ RDEPEND="
 	dev-libs/flatbuffers
 	dev-libs/hidapi
 	dev-libs/libusb:1
-	dev-libs/protobuf:=
 	dev-libs/pugixml
 	dev-libs/xxhash
 	>=dev-qt/qtbase-6.5.2:6[dbus,gui,widgets]
@@ -74,7 +73,6 @@ EGIT_SUBMODULES=(
 	"-3rdparty/miniupnp/miniupnp"
 	"-3rdparty/OpenAL/openal-soft"
 	"-3rdparty/opencv/opencv"
-	"-3rdparty/protobuf/protobuf"
 	"-3rdparty/pugixml"
 	"-3rdparty/rtmidi/rtmidi"
 	"-3rdparty/wolfssl/wolfssl"
@@ -124,7 +122,6 @@ src_configure() {
 		-DUSE_SYSTEM_MINIUPNPC=ON
 		-DUSE_SYSTEM_OPENAL=ON
 		-DUSE_SYSTEM_OPENCV=ON
-		-DUSE_SYSTEM_PROTOBUF=ON
 		-DUSE_SYSTEM_PUGIXML=ON
 		-DUSE_SYSTEM_RTMIDI=ON
 		-DUSE_SYSTEM_SDL=$(usex sdl ON OFF)
