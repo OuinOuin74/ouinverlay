@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<upstream>
+		<remote-id type="github">ChimeraOS/gamescope-session</remote-id>
+		<maintainer>
+			<email>samsagax@gmail.com</email>
+			<name>Joaquín I. Aramendía</name>
+		</maintainer>
+		<bugs-to>https://github.com/ChimeraOS/gamescope-session/issues</bugs-to>
+	</upstream>
+	<longdescription lang="en">
+		Common gamescope session files for running a gamescope-based
+		user session. This package provides the base session infrastructure
+		used by actual sessions such as gamescope-session-steam or
+		OpenGamepadUI-session.
+	</longdescription>
+</pkgmetadata>

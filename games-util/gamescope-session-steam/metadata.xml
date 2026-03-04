@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<upstream>
+		<remote-id type="github">ChimeraOS/gamescope-session-steam</remote-id>
+		<maintainer>
+			<email>aleshslovak@gmail.com</email>
+			<name>Alesh Slovak</name>
+		</maintainer>
+		<bugs-to>https://github.com/ChimeraOS/gamescope-session-steam/issues</bugs-to>
+	</upstream>
+	<longdescription lang="en">
+		Steam Big Picture session based on gamescope. Provides the Steam
+		session definition files for use with gamescope-session-plus,
+		enabling a console-like Steam experience similar to SteamOS.
+	</longdescription>
+</pkgmetadata>
