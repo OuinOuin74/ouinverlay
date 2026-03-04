@@ -29,6 +29,7 @@ RDEPEND="
 	sys-process/lsof
 	virtual/libusb:1
 	sys-power/acpi_call
+	dev-libs/hidapi
 "
 
 DEPEND="${RDEPEND}
