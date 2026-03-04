@@ -1,0 +1,12 @@
+DEFINED_PHASES=install
+DESCRIPTION=Steam session for games-util/gamescope-session
+EAPI=8
+HOMEPAGE=https://github.com/bazzite-org/gamescope-session-steam
+INHERIT=desktop
+KEYWORDS=~amd64
+LICENSE=MIT
+RDEPEND=games-util/gamescope-session games-util/steam-launcher
+SLOT=0
+SRC_URI=https://github.com/bazzite-org/gamescope-session-steam/archive/f655d12ae3ef168e9521ba87a2a1bd032fae6001.tar.gz -> gamescope-session-steam-0_p20250314.gh.tar.gz
+_eclasses_=desktop	26d57169ca094c04be416993844ec8bc
+_md5_=9fc46f70475bcd3c58db3bf628425c11
