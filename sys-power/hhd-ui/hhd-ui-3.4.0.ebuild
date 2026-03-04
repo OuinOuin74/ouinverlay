@@ -13,7 +13,7 @@ SRC_URI="
 	https://github.com/hhd-dev/hhd-ui/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
 	https://github.com/electron/electron/releases/download/v${ELECTRON_VER}/electron-v${ELECTRON_VER}-linux-x64.zip
 		-> electron-${ELECTRON_VER}-linux-x64.zip
-	https://github.com/OuinOuin74/hhd-overlay/releases/download/hhd-ui-${PV}-deps/hhd-ui-${PV}-node_modules.tar.gz
+	https://github.com/OuinOuin74/ouinverlay/releases/download/hhd-ui-${PV}-deps/hhd-ui-${PV}-node_modules.tar.gz
 "
 
 S="${WORKDIR}/hhd-ui-${PV}"
