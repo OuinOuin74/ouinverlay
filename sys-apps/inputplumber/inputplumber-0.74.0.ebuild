@@ -388,6 +388,7 @@ RDEPEND="
 	sys-apps/dbus
 	|| ( sys-apps/systemd sys-auth/elogind )
 	virtual/libudev
+	net-libs/libiio
 "
 
 DEPEND="${RDEPEND}"
