@@ -6,8 +6,8 @@ EAPI=8
 inherit git-r3
 
 DESCRIPTION="Steam Big Picture session based on gamescope"
-HOMEPAGE="https://github.com/ChimeraOS/gamescope-session-steam"
-EGIT_REPO_URI="https://github.com/ChimeraOS/gamescope-session-steam.git"
+HOMEPAGE="https://github.com/bazzite-org/gamescope-session-steam"
+EGIT_REPO_URI="https://github.com/bazzite-org/gamescope-session-steam.git"
 
 LICENSE="MIT"
 SLOT="0"

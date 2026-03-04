@@ -6,8 +6,8 @@ EAPI=8
 inherit git-r3
 
 DESCRIPTION="Common gamescope session files"
-HOMEPAGE="https://github.com/ChimeraOS/gamescope-session"
-EGIT_REPO_URI="https://github.com/ChimeraOS/gamescope-session.git"
+HOMEPAGE="https://github.com/bazzite-org/gamescope-session"
+EGIT_REPO_URI="https://github.com/bazzite-org/gamescope-session.git"
 
 LICENSE="MIT"
 SLOT="0"

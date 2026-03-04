@@ -2,7 +2,7 @@
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<upstream>
-		<remote-id type="github">ChimeraOS/gamescope-session-steam</remote-id>
+		<remote-id type="github">bazzite-org/gamescope-session-steam</remote-id>
 		<maintainer>
 			<email>aleshslovak@gmail.com</email>
 			<name>Alesh Slovak</name>

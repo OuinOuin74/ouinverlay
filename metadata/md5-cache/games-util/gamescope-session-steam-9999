@@ -2,11 +2,11 @@ BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=install unpack
 DESCRIPTION=Steam Big Picture session based on gamescope
 EAPI=8
-HOMEPAGE=https://github.com/ChimeraOS/gamescope-session-steam
+HOMEPAGE=https://github.com/bazzite-org/gamescope-session-steam
 INHERIT=git-r3
 LICENSE=MIT
 PROPERTIES=live
 RDEPEND=gui-wm/gamescope games-util/gamescope-session media-fonts/dejavu
 SLOT=0
 _eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81
-_md5_=097963795ff21974d25bd809cc9a25b8
+_md5_=7df7812bf5ae9bc5aacf261f36f5e8c4
