@@ -20,6 +20,7 @@ RDEPEND="
 	>=sys-apps/inputplumber-0.74
 	sys-apps/dbus
 	|| ( sys-apps/systemd sys-auth/elogind )
+	app-accessibility/speech-dispatcher
 "
 
 DEPEND="${RDEPEND}"
