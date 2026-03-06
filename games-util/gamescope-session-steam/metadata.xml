@@ -2,12 +2,12 @@
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<upstream>
-		<remote-id type="github">bazzite-org/gamescope-session-steam</remote-id>
+		<remote-id type="github">OpenGamingCollective/gamescope-session-steam</remote-id>
 		<maintainer>
 			<email>aleshslovak@gmail.com</email>
 			<name>Alesh Slovak</name>
 		</maintainer>
-		<bugs-to>https://github.com/ChimeraOS/gamescope-session-steam/issues</bugs-to>
+		<bugs-to>https://github.com/OpenGamingCollective/gamescope-session-steam/issues</bugs-to>
 	</upstream>
 	<longdescription lang="en">
 		Steam Big Picture session based on gamescope. Provides the Steam

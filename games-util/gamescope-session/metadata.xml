@@ -2,19 +2,13 @@
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<upstream>
-		<remote-id type="github">bazzite-org/gamescope-session</remote-id>
+		<remote-id type="github">OpenGamingCollective/gamescope-session</remote-id>
 		<maintainer>
 			<email>samsagax@gmail.com</email>
 			<name>Joaquín I. Aramendía</name>
 		</maintainer>
-		<bugs-to>https://github.com/ChimeraOS/gamescope-session/issues</bugs-to>
+		<bugs-to>https://github.com/OpenGamingCollective/gamescope-session/issues</bugs-to>
 	</upstream>
-	<use>
-	  <flag name="steam">
-	  Pull in Steam session via
-	    <pkg>games-util/gamescope-session-steam</pkg>
-	  </flag>
-  </use>
 	<longdescription lang="en">
 		Common gamescope session files for running a gamescope-based
 		user session. This package provides the base session infrastructure
