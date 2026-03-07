@@ -1,0 +1,52 @@
+--- a/steamos-manager/src/daemon/root.rs	2026-03-07 07:02:55.747025620 +0000
++++ b/steamos-manager/src/daemon/root.rs	2026-03-07 07:02:55.791025701 +0000
+@@ -18,11 +18,8 @@
+ use zbus::connection::{Builder, Connection};
+ 
+ use crate::daemon::{Daemon, DaemonCommand, DaemonContext, channel};
+-use crate::ds_inhibit::Inhibitor;
+-use crate::inputplumber::DeckService;
+ use crate::manager::root::SteamOSManager;
+ use crate::path;
+-use crate::sls::ftrace::Ftrace;
+ use crate::sls::{LogLayer, LogReceiver};
+ use crate::sysfs::SysfsWriterService;
+ 
+@@ -79,21 +76,8 @@
+         }
+     }
+ 
+-    async fn reload_ds_inhibit(&mut self, daemon: &mut Daemon<RootContext>) -> Result<()> {
+-        match (
+-            self.state.services.ds_inhibit.enabled,
+-            self.ds_inhibit.as_ref(),
+-        ) {
+-            (false, Some(handle)) => {
+-                handle.cancel();
+-                self.ds_inhibit = None;
+-            }
+-            (true, None) => {
+-                let inhibitor = Inhibitor::init().await?;
+-                self.ds_inhibit = Some(daemon.add_service(inhibitor));
+-            }
+-            _ => (),
+-        }
++    async fn reload_ds_inhibit(&mut self, _daemon: &mut Daemon<RootContext>) -> Result<()> {
++        // ds_inhibit disabled for HHD compatibility
+         Ok(())
+     }
+ }
+@@ -123,13 +107,6 @@
+     ) -> Result<()> {
+         self.state = state;
+ 
+-        let connection = daemon.get_connection();
+-        let ftrace = Ftrace::init(&connection).await?;
+-        daemon.add_service(ftrace);
+-
+-        let ip = DeckService::init(connection);
+-        daemon.add_service(ip);
+-
+         let sysfs = SysfsWriterService::init()?;
+         daemon.add_service(sysfs);
+ 

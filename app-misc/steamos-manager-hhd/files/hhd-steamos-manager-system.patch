@@ -1,0 +1,14 @@
+--- a/data/system/steamos-manager.service	2026-03-07 07:13:13.347158733 +0000
++++ b/data/system/steamos-manager.service	2026-03-07 07:13:13.384158801 +0000
+@@ -1,7 +1,9 @@
+ [Unit]
+ Description=SteamOS Manager Daemon
+-Wants=steamos-log-submitter.service
+-After=steamos-log-submitter.service
++Wants=hhd.service
++Wants=hhdl.service
++After=hhd.service
++After=hhdl.service
+ StartLimitIntervalSec=120
+ StartLimitBurst=5
+ 

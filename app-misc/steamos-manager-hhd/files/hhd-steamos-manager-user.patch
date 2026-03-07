@@ -1,0 +1,12 @@
+--- a/data/user/steamos-manager.service	2026-03-07 07:14:25.825291527 +0000
++++ b/data/user/steamos-manager.service	2026-03-07 07:15:27.237404046 +0000
+@@ -1,5 +1,9 @@
+ [Unit]
+ Description=SteamOS Manager Daemon
++Before=graphical-session.target
++Before=gamescope-session-plus@steam.service
++After=hhd.service
++After=hhdl.service
+ StartLimitIntervalSec=120
+ StartLimitBurst=5
+ 

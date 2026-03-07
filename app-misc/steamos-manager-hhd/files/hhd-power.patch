@@ -1,0 +1,165 @@
+--- a/steamos-manager/src/power.rs	2026-03-07 06:45:34.774726948 +0000
++++ b/steamos-manager/src/power.rs	2026-03-07 06:46:05.699822882 +0000
+@@ -20,10 +20,11 @@
+ use tokio::fs::{self, File, read_dir, read_to_string, try_exists};
+ use tokio::io::{AsyncWriteExt, ErrorKind, Interest};
+ use tokio::net::unix::pipe;
++use tokio::process::Command;
+ use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
+ use tokio::sync::oneshot;
+ use tokio::task::JoinSet;
+-use tracing::{debug, error, warn};
++use tracing::{debug, error, info, warn};
+ use zbus::names::OwnedBusName;
+ use zbus::zvariant::OwnedObjectPath;
+ use zbus::{Connection, ObjectServer, fdo};
+@@ -143,6 +144,9 @@
+     proxy: Option<TdpLimit1Proxy<'proxy>>,
+ }
+ 
++#[derive(Debug)]
++pub(crate) struct HhdTdpManager {}
++
+ #[async_trait]
+ pub(crate) trait TdpLimitManager: Send + Sync {
+     async fn get_tdp_limit(&self) -> Result<u32>;
+@@ -163,6 +167,15 @@
+ }
+ 
+ pub(crate) async fn tdp_limit_manager(system: &Connection) -> Result<Box<dyn TdpLimitManager>> {
++    let hhd_status = get_hhd_status().await;
++
++    if hhd_status == HhdStatus::Active {
++        debug!("Using handheld daemon for TDP limiting");
++        return Ok(Box::new(HhdTdpManager {}));
++    } else if hhd_status == HhdStatus::Conflicts {
++        bail!("Conflicting TDP limiting method found");
++    }
++
+     let config = device_config().await?;
+     if let Some(config) = config.as_ref().and_then(|config| config.tdp_limit.as_ref()) {
+         Ok(match &config.method {
+@@ -660,6 +673,101 @@
+     }
+ }
+ 
++#[derive(PartialEq, Debug)]
++pub(crate) enum HhdStatus {
++    Inactive,
++    Active,
++    Conflicts,
++}
++
++pub(crate) const HHD_CMD: &str = "hhd.steamos";
++
++async fn get_hhd_status() -> HhdStatus {
++    let output = Command::new(HHD_CMD)
++        .arg("steamos-tdp")
++        .arg("get")
++        .output()
++        .await;
++
++    if output.is_err() {
++        return HhdStatus::Inactive;
++    }
++
++    let code = output.unwrap().status.code().unwrap_or(0);
++    match code {
++        1 => HhdStatus::Inactive,
++        2 => HhdStatus::Conflicts,
++        _ => HhdStatus::Active,
++    }
++}
++
++pub(crate) async fn enable_power_features() -> bool {
++    let hhd_status = get_hhd_status().await;
++    info!("Handheld daemon TDP status: {:?}", hhd_status);
++    hhd_status == HhdStatus::Inactive
++}
++
++impl HhdTdpManager {}
++
++#[async_trait]
++impl TdpLimitManager for HhdTdpManager {
++    async fn get_tdp_limit(&self) -> Result<u32> {
++        anyhow::bail!("Getting TDP from handheld daemon is not implemented.");
++    }
++
++    async fn set_tdp_limit(&self, limit: u32) -> Result<()> {
++        let output = Command::new(HHD_CMD)
++            .arg("steamos-tdp")
++            .arg(limit.to_string())
++            .output()
++            .await
++            .map_err(|e| anyhow!("Failed to execute hhd.steamos steamos-tdp {limit}: {e}"))?;
++
++        ensure!(
++            output.status.success(),
++            "hhd.steamos steamos-tdp exited with status {status}",
++            status = output.status
++        );
++
++        Ok(())
++    }
++
++    async fn get_tdp_limit_range(&self) -> Result<RangeInclusive<u32>> {
++        let output = Command::new(HHD_CMD)
++            .arg("steamos-tdp")
++            .arg("get")
++            .output()
++            .await
++            .map_err(|e| anyhow!("Failed to execute hhd.steamos steamos-tdp get: {e}"))?;
++
++        ensure!(
++            output.status.success(),
++            "hhd.steamos steamos-tdp get exited with status {status}",
++            status = output.status
++        );
++
++        let stdout = String::from_utf8(output.stdout)
++            .map_err(|e| anyhow!("Invalid UTF-8 from hhd.steamos steamos-tdp get: {e}"))?;
++
++        let mut parts = stdout.split_whitespace();
++        let min: u32 = parts
++            .next()
++            .ok_or_else(|| anyhow!("Missing min value"))?
++            .parse()
++            .map_err(|e| anyhow!("Failed to parse min value: {e}"))?;
++        let max: u32 = parts
++            .next()
++            .ok_or_else(|| anyhow!("Missing max value"))?
++            .parse()
++            .map_err(|e| anyhow!("Failed to parse max value: {e}"))?;
++        Ok(min..=max)
++    }
++
++    async fn is_active(&self) -> Result<bool> {
++        Ok(true)
++    }
++}
++
+ async fn find_battery_charge_path() -> Result<PathBuf> {
+     let config = device_config().await?;
+     let config = config
+@@ -889,9 +997,6 @@
+         &mut self,
+         identifier: impl AsRef<str>,
+     ) -> Result<Option<OwnedFd>> {
+-        if self.download_mode_limit.is_none() {
+-            return Ok(None);
+-        }
+         let (send, recv) = pipe::pipe()?;
+         let identifier = identifier.as_ref().to_string();
+         self.download_handles
+@@ -900,7 +1005,10 @@
+             .or_insert(1);
+         self.download_set
+             .spawn(TdpManagerService::wait_on_handle(recv, identifier));
+-        self.update_download_mode().await?;
++
++        if self.download_mode_limit.is_some() {
++            self.update_download_mode().await?;
++        }
+         Ok(Some(send.into_blocking_fd()?))
+     }
+ 

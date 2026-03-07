@@ -1,0 +1,159 @@
+--- a/steamos-manager/src/manager/user.rs	2026-03-07 06:52:44.009818181 +0000
++++ b/steamos-manager/src/manager/user.rs	2026-03-07 06:53:11.810702003 +0000
+@@ -45,9 +45,9 @@
+ use crate::platform::platform_config;
+ use crate::power::{
+     BATTERY_DEFAULT_SUGGESTED_MINIMUM_LIMIT, CpuSchedulerManager, TdpManagerCommand,
+-    get_available_cpu_scaling_governors, get_available_platform_profiles, get_cpu_boost_state,
+-    get_cpu_scaling_governor, get_max_charge_level, get_platform_profile, register_tdp_limit1,
+-    unregister_tdp_limit1,
++    enable_power_features, get_available_cpu_scaling_governors, get_available_platform_profiles,
++    get_cpu_boost_state, get_cpu_scaling_governor, get_max_charge_level, get_platform_profile,
++    register_tdp_limit1, unregister_tdp_limit1,
+ };
+ use crate::proxy::{
+     BatteryChargeLimit1Proxy, CpuBoost1Proxy, FactoryReset1Proxy, FanControl1Proxy,
+@@ -56,7 +56,7 @@
+ };
+ use crate::screenreader::{OrcaManager, ScreenReaderAction, ScreenReaderMode};
+ use crate::session::{
+-    LoginMode, SessionManager, SessionManagerMessage, SessionManagerService, is_session_managed,
++    LoginMode, SessionManager, SessionManagerMessage, SessionManagerService,
+     valid_desktop_sessions,
+ };
+ use crate::wifi::{
+@@ -1567,11 +1567,8 @@
+     proxy: &Proxy<'static>,
+     object_server: &ObjectServer,
+     tdp_manager: Option<UnboundedSender<TdpManagerCommand>>,
++    power_features: bool,
+ ) -> Result<()> {
+-    let Some(config) = device_config().await? else {
+-        return Ok(());
+-    };
+-
+     let performance_profile = PerformanceProfile1 {
+         proxy: proxy.clone(),
+         tdp_limit_manager: tdp_manager.clone(),
+@@ -1581,14 +1578,7 @@
+         let low_power_mode = LowPowerMode1 {
+             manager: manager.clone(),
+         };
+-        if config
+-            .tdp_limit
+-            .as_ref()
+-            .and_then(|config| config.download_mode_limit)
+-            .is_some()
+-        {
+-            object_server.at(MANAGER_PATH, low_power_mode).await?;
+-        }
++        object_server.at(MANAGER_PATH, low_power_mode).await?;
+ 
+         let object_server = object_server.clone();
+         spawn(async move {
+@@ -1605,6 +1595,14 @@
+         });
+     }
+ 
++    if !power_features {
++        return Ok(());
++    }
++
++    let Some(config) = device_config().await? else {
++        return Ok(());
++    };
++
+     if let Some(config) = config.performance_profile.as_ref()
+         && !get_available_platform_profiles(&config.platform_profile_name)
+             .await
+@@ -1680,7 +1678,8 @@
+ 
+     let object_server = session.object_server();
+ 
+-    if let Err(e) = create_device_interfaces(&proxy, object_server, tdp_manager.clone()).await {
++    let power_features = enable_power_features().await;
++    if let Err(e) = create_device_interfaces(&proxy, object_server, tdp_manager.clone(), power_features).await {
+         error!("Failed to initalize device-specific interfaces: {e}");
+     }
+ 
+@@ -1703,17 +1702,35 @@
+         object_server.at(MANAGER_PATH, wifi_debug_dump).await?;
+     }
+ 
+-    if get_max_charge_level().await.is_ok() {
+-        object_server.at(MANAGER_PATH, battery_charge_limit).await?;
+-    }
+-
+-    if get_cpu_boost_state().await.is_ok() {
+-        object_server.at(MANAGER_PATH, cpu_boost).await?;
+-    }
+-
+-    object_server.at(MANAGER_PATH, cpu_scaling).await?;
+-    if CpuSchedulerManager::is_supported().await? {
+-        object_server.at(MANAGER_PATH, cpu_scheduler).await?;
++    if power_features {
++        if get_max_charge_level().await.is_ok() {
++            object_server.at(MANAGER_PATH, battery_charge_limit).await?;
++        }
++
++        if get_cpu_boost_state().await.is_ok() {
++            object_server.at(MANAGER_PATH, cpu_boost).await?;
++        }
++
++        object_server.at(MANAGER_PATH, cpu_scaling).await?;
++        if CpuSchedulerManager::is_supported().await? {
++            object_server.at(MANAGER_PATH, cpu_scheduler).await?;
++        }
++
++        match gpu_power_profile_driver().await {
++            Ok(driver) => {
++                object_server
++                    .at(
++                        MANAGER_PATH,
++                        GpuPowerProfile1 {
++                            proxy: proxy.clone(),
++                            driver,
++                            order: SerialOrderValidator::default(),
++                        },
++                    )
++                    .await?;
++            }
++            Err(e) => warn!("Can't add GpuPowerProfile1 interface: {e}"),
++        }
+     }
+ 
+     match gpu_performance_level_driver().await {
+@@ -1732,22 +1749,6 @@
+         Err(e) => warn!("Can't add GpuPerformanceLevel1 interface: {e}"),
+     }
+ 
+-    match gpu_power_profile_driver().await {
+-        Ok(driver) => {
+-            object_server
+-                .at(
+-                    MANAGER_PATH,
+-                    GpuPowerProfile1 {
+-                        proxy: proxy.clone(),
+-                        driver,
+-                        order: SerialOrderValidator::default(),
+-                    },
+-                )
+-                .await?;
+-        }
+-        Err(e) => warn!("Can't add GpuPowerProfile1 interface: {e}"),
+-    }
+-
+     if hdmi_cec.hdmi_cec.get_enabled_state().await.is_ok() {
+         object_server.at(MANAGER_PATH, hdmi_cec).await?;
+     }
+@@ -1760,7 +1761,9 @@
+ 
+     let mut session_manager_service = None;
+     let mut screenreader_setup_service = None;
+-    if is_session_managed().await? {
++    // is_session_managed() check disabled for HHD compatibility
++    // (SDDM steamos.conf check is SteamOS-specific)
++    {
+         match session_management.manager.create_service().await {
+             Ok((service, channel)) => {
+                 session_manager_service = Some(service);
