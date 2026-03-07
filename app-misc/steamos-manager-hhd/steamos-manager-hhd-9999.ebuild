@@ -6,9 +6,9 @@ EAPI=8
 inherit cargo git-r3
 
 DESCRIPTION="Fork of Valve's steamos-manager with Handheld Daemon (HHD) TDP integration"
-HOMEPAGE="https://github.com/bazzite-org/steamos-manager"
+HOMEPAGE="https://github.com/hhd-dev/steamos-manager-hhd"
 
-EGIT_REPO_URI="https://github.com/bazzite-org/steamos-manager.git"
+EGIT_REPO_URI="https://github.com/hhd-dev/steamos-manager-hhd.git"
 EGIT_BRANCH="master"
 
 LICENSE="MIT Apache-2.0 Unicode-DFS-2016"
@@ -17,7 +17,6 @@ KEYWORDS=""
 
 RDEPEND="
 	>=sys-power/hhd-4.1
-	>=sys-apps/inputplumber-0.74
 	sys-apps/dbus
 	|| ( sys-apps/systemd sys-auth/elogind )
 	app-accessibility/speech-dispatcher

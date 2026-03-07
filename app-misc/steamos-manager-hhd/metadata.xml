@@ -6,6 +6,6 @@
 		<name>Sébastien TERRIER</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">bazzite-org/steamos-manager</remote-id>
+		<remote-id type="github">hhd-dev/steamos-manager-hhd</remote-id>
 	</upstream>
 </pkgmetadata>
