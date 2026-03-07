@@ -31,7 +31,7 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/no-orca-service.patch"
+	"${FILESDIR}/no-orca.patch"
 )
 
 src_unpack() {
