@@ -39,7 +39,61 @@
      let config = device_config().await?;
      if let Some(config) = config.as_ref().and_then(|config| config.tdp_limit.as_ref()) {
          Ok(match &config.method {
-@@ -660,6 +673,101 @@
+@@ -611,33 +624,36 @@
+ #[async_trait]
+ impl<'proxy> TdpLimitManager for RemoteInterfaceLimitManager<'proxy> {
+     async fn get_tdp_limit(&self) -> Result<u32> {
+-        let proxy = self
+-            .proxy
+-            .as_ref()
+-            .ok_or(anyhow!("No remote TDP manager"))?;
++        if self.proxy.is_none() && get_hhd_status().await == HhdStatus::Active {
++            return HhdTdpManager {}.get_tdp_limit().await;
++        }
++        let proxy = self.proxy.as_ref().ok_or(anyhow!("No remote TDP manager"))?;
+         Ok(proxy.tdp_limit().await?)
+     }
+ 
+     async fn set_tdp_limit(&self, limit: u32) -> Result<()> {
+-        let proxy = self
+-            .proxy
+-            .as_ref()
+-            .ok_or(anyhow!("No remote TDP manager"))?;
+-        Ok(proxy.set_tdp_limit(limit).await?)
++        if self.proxy.is_none() && get_hhd_status().await == HhdStatus::Active {
++            return HhdTdpManager {}.set_tdp_limit(limit).await;
++        }
++        let proxy = self.proxy.as_ref().ok_or(anyhow!("No remote TDP manager"))?;
++        Ok(proxy.set_tdp_limit(limit).await?)
+     }
+ 
+     async fn get_tdp_limit_range(&self) -> Result<RangeInclusive<u32>> {
+-        let proxy = self
+-            .proxy
+-            .as_ref()
+-            .ok_or(anyhow!("No remote TDP manager"))?;
+-        let min = proxy.tdp_limit_min().await?;
+-        let max = proxy.tdp_limit_max().await?;
+-        Ok(min..=max)
++        if self.proxy.is_none() && get_hhd_status().await == HhdStatus::Active {
++            return HhdTdpManager {}.get_tdp_limit_range().await;
++        }
++        let proxy = self.proxy.as_ref().ok_or(anyhow!("No remote TDP manager"))?;
++        let min = proxy.tdp_limit_min().await?;
++        let max = proxy.tdp_limit_max().await?;
++        Ok(min..=max)
+     }
+ 
+     async fn is_active(&self) -> Result<bool> {
+-        Ok(self.proxy.is_some())
++        if self.proxy.is_none() {
++            return Ok(get_hhd_status().await == HhdStatus::Active);
++        }
++        Ok(true)
+     }
+ 
+     fn needs_root(&self) -> bool {
+@@ -660,6 +676,101 @@
      }
  }
  
@@ -141,7 +195,7 @@
  async fn find_battery_charge_path() -> Result<PathBuf> {
      let config = device_config().await?;
      let config = config
-@@ -889,9 +997,6 @@
+@@ -889,9 +1000,6 @@
          &mut self,
          identifier: impl AsRef<str>,
      ) -> Result<Option<OwnedFd>> {
@@ -151,7 +205,7 @@
          let (send, recv) = pipe::pipe()?;
          let identifier = identifier.as_ref().to_string();
          self.download_handles
-@@ -900,7 +1005,10 @@
+@@ -900,7 +1008,10 @@
              .or_insert(1);
          self.download_set
              .spawn(TdpManagerService::wait_on_handle(recv, identifier));

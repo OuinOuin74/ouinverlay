@@ -26,7 +26,6 @@ DEPEND="${RDEPEND}"
 
 BDEPEND="
 	|| ( dev-lang/rust-bin dev-lang/rust )
-	llvm-core/clang
 	dev-vcs/git
 "
 

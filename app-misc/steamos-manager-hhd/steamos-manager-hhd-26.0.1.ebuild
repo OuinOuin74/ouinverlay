@@ -228,13 +228,13 @@ RDEPEND="
 	>=sys-power/hhd-4.1
 	sys-apps/dbus
 	|| ( sys-apps/systemd sys-auth/elogind )
+	app-accessibility/speech-dispatcher
 "
 
 DEPEND="${RDEPEND}"
 
 BDEPEND="
 	|| ( dev-lang/rust-bin dev-lang/rust )
-	llvm-core/clang
 	dev-vcs/git
 "
 
